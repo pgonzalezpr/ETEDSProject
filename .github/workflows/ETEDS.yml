@@ -5,17 +5,15 @@ name: DataProcessingWorkflow
 # Controls when the workflow will run
 on: [push]
 jobs:
-
-jobs:
   UpdateData:
-    runs-on: ubuntu-latest
-      #- uses: actions/checkout@v2
-      #- name: checkout repo content
+      runs-on: ubuntu-latest
+      uses: actions/checkout@v2
+      name: checkout repo content
           
-      - name: setup python
+      -name: setup python
         uses: actions/setup-python@v2
         with:
-              python-version: 3.8 #install the python needed
+          python-version: 3.8 #install the python needed
               
       - name: execute extraction from landing zone
         run: 
