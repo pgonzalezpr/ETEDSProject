@@ -1,0 +1,35 @@
+# This is a basic workflow to help you get started with Actions
+
+name: DataProcessingWorkflow
+
+# Controls when the workflow will run
+on: [push]
+jobs:
+
+jobs:
+  UpdateData:
+    runs-on: ubuntu-latest
+      - uses: actions/checkout@v2
+      - name: checkout repo content
+          
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+              python-version: 3.8 #install the python needed
+              
+      - name: execute extraction from landing zone
+        run: 
+              ./notebooks/formatted/extract.py
+ 
+       - name: remove duplicates 
+        run: 
+              ./notebooks/trusted/Deduplication.py
+              
+      - name: outlier detection 
+        run: 
+              ./notebooks/trusted/OutlierDetection.py
+  
+        - name: combine trusted data sources and upload it to the exploitation zone
+          run: 
+              ./notebooks/exploitation/merging.py     
+        
